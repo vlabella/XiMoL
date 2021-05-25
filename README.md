@@ -35,4 +35,8 @@ On windows set USE_STATIC_RUNTIMES=ON to link to static runtimes: /MT instead of
 
 On Mac or Linux
 
+	cd ximol
+	cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=... -DZLIB_ROOT=...
+	cd build ; make
+
 
