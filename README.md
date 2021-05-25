@@ -18,3 +18,21 @@ This is a slightly modified version of the library from sourceforge.
 ## Build instructions
 
 This project uses cmake and can be built on Windows, Mac, and Linux
+
+dependancies:
+
+* boost
+* zlib
+
+prior to building with cmake set ZLIB_ROOT and BOOST_ROOT to appropriate folders as environment variables or pass them to the cmake command.  For example on Windows
+
+
+	cd ximol
+	cmake -S ./src -B ./build -A x64 -T host=x64 -DBOOST_ROOT=... -DZLIB_ROOT=...
+	cmake --build ./build --config Release
+
+On windows set USE_STATIC_RUNTIMES=ON to link to static runtimes: /MT instead of /MD.
+
+On Mac or Linux
+
+
