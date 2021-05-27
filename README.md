@@ -67,26 +67,27 @@ is read like this
 		if(xis.is_open()){
 			xis >> ximol::xml::prolog();
 			while( is_stag(xis) ){
-			ximol::xstring s;
-			ximol::xml::attributes att;
-			ximol::parser::read_stag(xis,s,att);
-			if( ximol::str<std::string>::cast(s) == "MyInfo" ){
-				std::string temps;
-				temps = ximol::extract_attribute<std::string>::get(att,"Foo");
-			}else if( ximol::str<std::string>::cast(s) == "Double" ){
-				xis >> ximol::xml::content(Double) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "Int" ){
-				xis >> ximol::xml::content(Int) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "Float" ){
-				xis >> ximol::xml::content(Float) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "String" ){
-				xis >> ximol::xml::content(String) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "Char" ){
-				xis >> ximol::xml::content(Char) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "Time" ){
-				xis >> ximol::xml::content(Time) >> ximol::xml::etag();
-			}else if( ximol::str<std::string>::cast(s) == "Size" ){
-				xis >> ximol::xml::content(Size) >> ximol::xml::etag();
+				ximol::xstring s;
+				ximol::xml::attributes att;
+				ximol::parser::read_stag(xis,s,att);
+				if( ximol::str<std::string>::cast(s) == "MyInfo" ){
+					std::string temps;
+					temps = ximol::extract_attribute<std::string>::get(att,"Foo");
+				}else if( ximol::str<std::string>::cast(s) == "Double" ){
+					xis >> ximol::xml::content(Double) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "Int" ){
+					xis >> ximol::xml::content(Int) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "Float" ){
+					xis >> ximol::xml::content(Float) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "String" ){
+					xis >> ximol::xml::content(String) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "Char" ){
+					xis >> ximol::xml::content(Char) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "Time" ){
+					xis >> ximol::xml::content(Time) >> ximol::xml::etag();
+				}else if( ximol::str<std::string>::cast(s) == "Size" ){
+					xis >> ximol::xml::content(Size) >> ximol::xml::etag();
+				}
 			} // -- end while
 			xis >> ximol::xml::etag();
 			xis.close();
