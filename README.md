@@ -39,4 +39,60 @@ On Mac or Linux
 	cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=... -DZLIB_ROOT=...
 	cd build ; make
 
+## Example
+
+the following XML file
+
+	<MyXML Foo="some_info">
+	<Double>
+		3.14159
+	</Double>
+	...
+	</MyXML>
+
+
+is read like this
+
+	try{
+		double Double;
+		int Int;
+		string String;
+		float Float;
+		char Char;
+		time_t Time;
+		size_t Size;
+		ximol::xifstream xis;
+		xis.encoding("UTF-8");
+		xis.open(filename);
+		if(xis.is_open()){
+			xis >> ximol::xml::prolog();
+			while( is_stag(xis) ){
+			ximol::xstring s;
+			ximol::xml::attributes att;
+			ximol::parser::read_stag(xis,s,att);
+			if( ximol::str<std::string>::cast(s) == "MyInfo" ){
+				std::string temps;
+				temps = ximol::extract_attribute<std::string>::get(att,"Foo");
+			}else if( ximol::str<std::string>::cast(s) == "Double" ){
+				xis >> ximol::xml::content(Double) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "Int" ){
+				xis >> ximol::xml::content(Int) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "Float" ){
+				xis >> ximol::xml::content(Float) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "String" ){
+				xis >> ximol::xml::content(String) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "Char" ){
+				xis >> ximol::xml::content(Char) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "Time" ){
+				xis >> ximol::xml::content(Time) >> ximol::xml::etag();
+			}else if( ximol::str<std::string>::cast(s) == "Size" ){
+				xis >> ximol::xml::content(Size) >> ximol::xml::etag();
+			} // -- end while
+			xis >> ximol::xml::etag();
+			xis.close();
+		}
+	}
+	catch(std::exception &){
+		...
+	}
 
